@@ -1,7 +1,18 @@
 from fastapi import FastAPI
 from routers import expense, login, signup
+from fastapi.middleware.cors import CORSMiddleware
+
 
 app = FastAPI()
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # change to your frontend domain in production
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Include all routers here
 app.include_router(expense.router)
